@@ -1,7 +1,7 @@
 package main
 
 import (
-	_ "newWechat/routers"
+	_ "newsWechat/routers"
 	"github.com/astaxie/beego"
 )
 

@@ -95,4 +95,5 @@ ENV/
 .ropeproject
 .idea
 *.pyc
+*.exe
 

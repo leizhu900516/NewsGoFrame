@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"newWechat/controllers"
+	"newsWechat/controllers"
 	"github.com/astaxie/beego"
 )
 
