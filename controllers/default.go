@@ -5,7 +5,9 @@ import (
 	"time"
 	"fmt"
 )
-
+/*
+*beego默认主页
+*/
 type MainController struct {
 	beego.Controller
 }
