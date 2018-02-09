@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/static/layui/css/layui.css" rel="stylesheet">
+    <link href="/static/css/index.css" rel="stylesheet">
+    <script src="/static/layui/layui.js"></script>
+</head>
+<body>
+<div class="layui-nav layui-bg-black">
+    <div class="layui-container">
+        <ul >
+            <li class="layui-nav-item">
+                <a href="">分类1</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="">分类2</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="">分类3</a>
+            </li>
+        </ul>
+        <ul class="layui-nav fly-nav-user">
+            <li class="layui-nav-item">
+                <a href="/user/login/">登入</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="/user/reg/">注册</a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="/app/qq/" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入" class="iconfont icon-qq"></a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs">
+                <a href="/app/weibo/" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入" class="iconfont icon-weibo"></a>
+            </li> <span class="layui-nav-bar"></span>
+        </ul>
+    </div>
+</div>

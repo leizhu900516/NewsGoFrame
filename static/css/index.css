@@ -1,0 +1,25 @@
+html {
+    background-color: #F2F2F2;
+}
+.fly-nav-user {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.fly-panel {
+    margin-bottom: 15px;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+}
+
+/*底部样式*/
+.fly-footer {
+    margin: 50px 0 0;
+    padding: 20px 0 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #737573;
+    border-top: 1px solid #e2e2e2;
+    bottom: 0;
+}
