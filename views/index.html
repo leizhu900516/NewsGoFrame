@@ -380,6 +380,19 @@
         });
 
     });
+    //
+    $(document).ready(function () {
+        $.ajax({
+            url:"/api/news",
+            data:{"page":1,"limit":6},
+            contentType: "application/json;charset=utf-8",
+            type:"post",
+            success:function (result) {
+                console.log(result)
+            }
+
+        })
+    })
 </script>
 
 </body>
