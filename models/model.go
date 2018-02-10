@@ -33,14 +33,8 @@ type News_wechat struct {
 }
 
 func init(){
-	// set default database
-	orm.RegisterDataBase(beego.AppConfig.String("appname"), "mysql",
-		beego.AppConfig.String("mysqluser")+":"+beego.AppConfig.String("mysqlpass")+"@tcp("+beego.AppConfig.String("mysqlurls")+":"+beego.AppConfig.String("mysqlport")+")/"+beego.AppConfig.String("mysqldb")+"?charset=utf8",
-			30)
-
-	// register model
+	db_conn_str:=beego.AppConfig.String("mysqluser")+":"+beego.AppConfig.String("mysqlpass")+"@tcp("+beego.AppConfig.String("mysqlurls")+":"+beego.AppConfig.String("mysqlport")+")/"+beego.AppConfig.String("mysqldb")+"?charset=utf8"
 	orm.RegisterModel(new(News_wechat))
-
-	// create table
-	orm.RunSyncdb("default", false, true)
+	orm.RegisterDataBase("wechat","mysql",db_conn_str)
+	orm.RunSyncdb("wechat",false,true)
 }

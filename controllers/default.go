@@ -2,12 +2,17 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
+	_"github.com/astaxie/beego/orm"
 	"time"
+	_"github.com/go-sql-driver/mysql"
 	"fmt"
+	"database/sql"
+	"log"
 )
 /*
 *beego默认主页
 */
+
 type MainController struct {
 	beego.Controller
 }
@@ -22,8 +27,27 @@ type TestController struct {
 	beego.Controller
 }
 
-func (c *TestController) Get() {
-	c.TplName = "index.html"
+func (self *TestController) Post() {
+	param := self.Input()
+	page :=param.Get("page")
+	limit :=6
+	//sqlOrm := orm.NewOrm()
+	//sqlOrm.Using("wechat")
+	//var lists []orm.ParamsList
+	//res,err := sqlOrm.Raw("select * from news_wechat limit ?,?",page,limit).ValuesList(&lists)
+	//if err==nil && res >0{
+	//	fmt.Println(lists)
+	//}
+	db, err := sql.Open("mysql", beego.AppConfig.String("mysqluser")+":"+beego.AppConfig.String("mysqlpass")+"@tcp("+beego.AppConfig.String("mysqlurls")+":"+beego.AppConfig.String("mysqlport")+")/"+beego.AppConfig.String("mysqldb")+"?charset=utf8")
+	if err != nil {
+		log.Println(err)
+	}
+	//在这里进行一些数据库操作
+	defer db.Close()
+	rows, err := db.Query("select * from news_wechat limit ?,?",page,limit)
+	for rows.Next() {
+		fmt.Println(rows)
+	}
 }
 type TestJsonController struct{
 	beego.Controller

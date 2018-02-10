@@ -12,7 +12,111 @@ html {
     background-color: #fff;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
 }
+/*
+最新新闻
+*/
+.home-news-item {
+    height: 190px;
+    background: #fff;
+    border: 1px solid #ebebeb;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+.home-news-item__cover .lazy {
+    width: 100%;
+    height: 100%;
+}
+.home-news-item__cover{
+    float: left;
+}
+.home-news-item__main {
+    float: left;
+    position: relative;
+    width: 437px;
+    height: 100%;
+    padding: 12px 15px 12px 16px;
+}
 
+/*
+最热文章css
+*/
+.hot-article__title[data-v-5ee82df8] {
+    display: block;
+    width: 100%;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+.hot-article__title__idx.first[data-v-5ee82df8] {
+    background: #f33;
+    color: #fff;
+    padding-top: 1px;
+}
+.hot-article__title__idx.second[data-v-5ee82df8] {
+    background: #ff722b;
+    color: #fff;
+    padding-top: 1px;
+}
+.hot-article__title__idx.third[data-v-5ee82df8] {
+    background: #fa3;
+    color: #fff;
+    padding-top: 1px;
+}
+.hot-article__title__idx[data-v-5ee82df8] {
+    float: left;
+    color: #1482f0;
+    font-size: 16px;
+    border-radius: 2px;
+    margin-right: 10px;
+    width: 19px;
+    height: 19px;
+    text-align: center;
+    line-height: 19px;
+}
+.hot-article__title__text[data-v-5ee82df8] {
+    max-width: 567px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    float: left;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+.hot-article[data-v-5ee82df8] {
+    position: relative;
+    width: 100%;
+    height: 78px;
+    border-bottom: 1px solid #ebebeb;
+    padding: 16px 0;
+}
+
+/*
+右侧温馨通道部分css
+*/
+.fly-panel-title {
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 15px;
+    border-bottom: 1px dotted #E9E9E9;
+    color: #333;
+    border-radius: 2px 2px 0 0;
+    font-size: 14px;
+}
+.fly-panel-main {
+    padding: 10px 15px;
+}
+.fly-list-static li {
+    line-height: 26px;
+    list-style-position: inside;
+    list-style-type: disc;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.fly-list-static li a {
+    color: #01AAED;
+}
 /*底部样式*/
 .fly-footer {
     margin: 50px 0 0;
@@ -21,5 +125,8 @@ html {
     text-align: center;
     color: #737573;
     border-top: 1px solid #e2e2e2;
-    bottom: 0;
+    /*bottom: 0;*/
+    /*position: absolute;*/
+    width: 100%;
 }
+
