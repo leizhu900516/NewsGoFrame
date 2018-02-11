@@ -12,6 +12,15 @@ html {
     background-color: #fff;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
 }
+.component .layui-input {
+    height: 30px;
+    padding-left: 12px;
+    background-color: #424652;
+    background-color: rgba(255,255,255,.05)!important;
+    border: none 0;
+    color: #fff;
+    font-size: 12px;
+}
 /*
 最新新闻
 */
@@ -69,16 +78,19 @@ html {
     background: #f33;
     color: #fff;
     padding-top: 1px;
+    margin-left: 3px;
 }
 .hot-article__title__idx.second[data-v-5ee82df8] {
     background: #ff722b;
     color: #fff;
     padding-top: 1px;
+    margin-left: 3px;
 }
 .hot-article__title__idx.third[data-v-5ee82df8] {
     background: #fa3;
     color: #fff;
     padding-top: 1px;
+    margin-left: 3px;
 }
 .hot-article__title__idx[data-v-5ee82df8] {
     float: left;
