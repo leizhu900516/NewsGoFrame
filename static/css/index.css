@@ -15,6 +15,24 @@ html {
 /*
 最新新闻
 */
+.home-news-item__main__title {
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 18px;
+    line-height: 27px;
+    max-height: 54px;
+    width: 100%;
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 10px;
+    cursor: pointer;
+    overflow: hidden;
+}
 .home-news-item {
     height: 190px;
     background: #fff;
@@ -40,6 +58,7 @@ html {
 /*
 最热文章css
 */
+
 .hot-article__title[data-v-5ee82df8] {
     display: block;
     width: 100%;
