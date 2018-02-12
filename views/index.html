@@ -10,34 +10,30 @@
                     <li>最热文章</li>
                 </ul>
                 <div class="layui-tab-content" >
+                    <!--新闻列表-->
                     <div class="layui-tab-item layui-show" id="newslist_left">
-                        <div data-v-6ef8682e="">
-                            <div class="home-news-item" data-v-6ef8682e="">
-                                <a target="_blank" href="/articles/3233191" class="home-news-item__cover">
-                                    <div class="wscn-lazyload lazy">
-                                        <img style="" src="https://wpimg.wallstcn.com/4a31d2e0-2db6-43a5-b143-ecec9ef56ef0.jpg?imageView2/1/w/190/h/190" class="">
-                                    </div>
-                                </a>
-                                <div class="home-news-item__main">
-                                    <a target="_blank" href="/articles/3233191" class="home-news-item__main__title">原油期货重启倒计时 “上海油”竞争亚太定价基准</a>
-                                    <a target="_blank" href="/articles/3233191" class="home-news-item__main__summary">1992年，我国就推出原油、成品油的期货交易，但上市不久就关闭了交易。未来“上海油”，有望与现有的纽约、伦敦两地基准油价，共同组成全球24小时的连续交易机制。</a>
-                                    <div class="home-news-item__main__meta">
-                                        <div class="home-news-item__main__meta__left">
-                                            <div class="left-item">
-                                                <a target="_blank" href="/authors/834515" class="display-name">新华社</a>
-                                            </div> <!----> <!---->
-                                            <div class="left-item">
-                                                <svg width="1em" height="1em" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="icon">
-                                                    <path d="M512 0C229.232 0 0 229.232 0 512s229.232 512 512 512 512-229.232 512-512S794.768 0 512 0zm0 960C264.976 960 64 759.024 64 512S264.976 64 512 64s448 200.976 448 448-200.976 448-448 448zm246.72-346.496L531.888 510.4V225.872c0-17.68-14.336-32-32-32s-32 14.32-32 32v305.12a31.944 31.944 0 0 0 18.768 29.12l245.6 111.632a31.577 31.577 0 0 0 13.216 2.88c12.16 0 23.776-6.976 29.136-18.752 7.312-16.096.208-35.056-15.888-42.368z"></path></svg>
-                                                <span class="text">30分钟前</span>
-                                            </div>
+                        <div class="layui-row grid-demo layui-col-space10 site-demo-flow">
+                            <div class="layui-col-md3">
+                                <img src="https://gw.alicdn.com/bao/uploaded/i2/162734861/TB2V5rsX_gc61BjSZFkXXcTkFXa_!!162734861.jpg_400x400q90.jpg?t=1518395023940">
+                            </div>
+                            <div class="layui-col-md9" id="news_item_all_style">
+                                <div class="new_home_list">
+                                    <a class="news_title">中国证监会：3月26日启动原油期货挂牌交易</a>
+                                    <br>
+                                    <a class="news_abstract">1992年，我国就推出原油、成品油的期货交易，但上市不久就关闭了交易。未来“上海油”，有望与现有的纽约、伦敦两地基准油价，共同组成全球24小时的连续交易机制.</a>
+                                    <div class="bottom_refer_and_icon">
+                                        <div class="left">
+
+                                            <span>赞</span>
                                         </div>
-                                        <div class="home-news-item__main__meta__right"><!----> <!---->
+                                        <div class="right">
+                                            <i class="layui-icon"> &#xe60e;</i><span>30分钟前</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!--新闻列表-->
                     </div>
 
                     <div class="layui-tab-item">
@@ -90,9 +86,24 @@
                     </li>
                 </ul>
             </div>
+            <div class="fly-panel">
+                <div class="fly-panel-title"> 钻级赞助商 <span class="fly-mid"></span>
+                    <a href="/jie/15697/" class="fly-link fly-joinad    ">我要加入</a>
+                </div>
+                <div class="fly-panel-main" style="padding: 13px 15px;">
+                    <a href="/jie/15697/" target="_blank" rel="nofollow" class="fly-zanzhu" style="background-color: #393D49;">虚席以待</a>
+                </div>
+            </div>
+            <div class="fly-panel" style="padding: 20px 0; text-align: center;">
+                <div class="fly-panel-main">
+                    <img src="/static/images/gongzhonghao.jpg" style="max-width: 100%;" alt="layui">
+                    <p style="position: relative; color: #666;">微信扫码关注 layui 公众号</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<ul class="flow-default" id="LAY_demo1"></ul>
 {{template "foot.html"}}
 <script src="/static/js/jquery.js"></script>
 <script src="/static/js/getnewslist.js"></script>
@@ -140,6 +151,53 @@
     });
 
 </script>
+<script>
+    layui.use('flow', function(){
+        var flow = layui.flow;
 
+        flow.load({
+            elem: '#LAY_demo1' //流加载容器
+            ,scrollElem: '#LAY_demo1' //滚动条所在元素，一般不用填，此处只是演示需要。
+            ,done: function(page, next){ //执行下一页的回调
+
+                //模拟数据插入
+                setTimeout(function(){
+                    var lis = [];
+                    for(var i = 0; i < 8; i++){
+                        lis.push('<li>'+ ( (page-1)*8 + i + 1 ) +'</li>')
+                    }
+
+                    //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+                    //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+                    next(lis.join(''), page < 10); //假设总页数为 10
+                }, 500);
+            }
+        });
+
+        flow.load({
+            elem: '#LAY_demo2' //流加载容器
+            ,scrollElem: '#LAY_demo2' //滚动条所在元素，一般不用填，此处只是演示需要。
+            ,isAuto: false
+            ,isLazyimg: true
+            ,done: function(page, next){ //加载下一页
+                //模拟插入
+                setTimeout(function(){
+                    var lis = [];
+                    for(var i = 0; i < 6; i++){
+                        lis.push('<li><img lay-src="http://s17.mogucdn.com/p2/161011/upload_279h87jbc9l0hkl54djjjh42dc7i1_800x480.jpg?v='+ ( (page-1)*6 + i + 1 ) +'"></li>')
+                    }
+                    next(lis.join(''), page < 6); //假设总页数为 6
+                }, 500);
+            }
+        });
+
+        //按屏加载图片
+        flow.lazyimg({
+            elem: '#LAY_demo3 img'
+            ,scrollElem: '#LAY_demo3' //一般不用设置，此处只是演示需要。
+        });
+
+    });
+</script>
 </body>
 </html>
