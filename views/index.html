@@ -23,8 +23,7 @@
                                     <a class="news_abstract">1992年，我国就推出原油、成品油的期货交易，但上市不久就关闭了交易。未来“上海油”，有望与现有的纽约、伦敦两地基准油价，共同组成全球24小时的连续交易机制.</a>
                                     <div class="bottom_refer_and_icon">
                                         <div class="left">
-
-                                            <span>赞</span>
+                                            <i class="layui-icon">&#xe6c6;</i> <span>赞</span>
                                         </div>
                                         <div class="right">
                                             <i class="layui-icon"> &#xe60e;</i><span>30分钟前</span>
@@ -112,6 +111,11 @@
         var $ = layui.jquery
                 ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
         //触发事件
         var active = {
             tabAdd: function(){
@@ -121,13 +125,6 @@
                     ,content: '内容'+ (Math.random()*1000|0)
                     ,id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
                 })
-            }
-            ,tabDelete: function(othis){
-                //删除指定Tab项
-                element.tabDelete('demo', '44'); //删除：“商品管理”
-
-
-                othis.addClass('layui-btn-disabled');
             }
             ,tabChange: function(){
                 //切换到指定Tab项
@@ -159,7 +156,6 @@
             elem: '#LAY_demo1' //流加载容器
             ,scrollElem: '#LAY_demo1' //滚动条所在元素，一般不用填，此处只是演示需要。
             ,done: function(page, next){ //执行下一页的回调
-
                 //模拟数据插入
                 setTimeout(function(){
                     var lis = [];
@@ -189,12 +185,6 @@
                     next(lis.join(''), page < 6); //假设总页数为 6
                 }, 500);
             }
-        });
-
-        //按屏加载图片
-        flow.lazyimg({
-            elem: '#LAY_demo3 img'
-            ,scrollElem: '#LAY_demo3' //一般不用设置，此处只是演示需要。
         });
 
     });

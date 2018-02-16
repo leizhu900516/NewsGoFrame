@@ -9,6 +9,7 @@ import (
 	"database/sql"
 	"reflect"
 	"encoding/json"
+	"log"
 )
 /*
 *beego默认主页
@@ -56,6 +57,38 @@ func (self *TestController) Post() {
 	returndata["data"]=result
 	self.Data["json"]=returndata
 	self.ServeJSON()
+}
+type NewsDetailController struct {
+	beego.Controller
+}
+func (self *NewsDetailController) Get(){
+	fmt.Println(self.Ctx.Input.Param(":newsid"))
+	newsid := self.Ctx.Input.Param(":newsid")
+	db, err := sql.Open("mysql", beego.AppConfig.String("mysqluser")+":"+beego.AppConfig.String("mysqlpass")+"@tcp("+beego.AppConfig.String("mysqlurls")+":"+beego.AppConfig.String("mysqlport")+")/"+beego.AppConfig.String("mysqldb")+"?charset=utf8")
+	if err!=nil{
+		log.Fatal(err)
+	}
+	defer db.Close()
+	var (
+		cateid int
+		title string
+		abstract string
+		content string
+		addtime int64
+		shownumber int
+	)
+	err =db.QueryRow("select cateid,title,abstract,content,addtime,shownumber from news_wechat where newid=?",newsid).Scan(&cateid,&title,&abstract,&content,&addtime,&shownumber)
+	if err!=nil{
+		fmt.Println(err)
+	}
+	db.Exec("update news_wechat set shownumber=shownumber+1 where newid=?",newsid)
+	self.Data["cateid"] = cateid
+	self.Data["title"] = title
+	self.Data["abstract"] = abstract
+	self.Data["content"] = content
+	self.Data["shownumber"] = shownumber
+	self.Data["addtime"] = time.Unix(addtime,0).Format("2006-01-02 03:04:05 PM")
+	self.TplName = "news-detail.html"
 }
 type TestJsonController struct{
 	beego.Controller

@@ -1,0 +1,38 @@
+{{template "base.html"}}
+<br>
+<div class="layui-container">
+    <div class="layui-row layui-col-space10" >
+        <div class="layui-col-md9 ">
+            <div class="fly-panel detail-box">
+                <h1 style="padding-bottom: 5px;">{{.title}}</h1>
+                <div style="    margin-bottom: 24px;">
+                    <span style="float: left">{{.addtime}}</span>
+                    <div style="float: right;margin-right: 10px;">
+                        <svg width="1em" height="1em" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="meta-item__icon icon" style="font-size:14px;color:#999999;margin-right:6px;" data-v-849552ce=""><path d="M0 0h1024v837.818H698.182L512 1024 325.818 837.818H0V0zm93.09 93.09v651.637h279.274L512 884.364l139.636-139.637H930.91V93.091H93.091zm186.183 186.183h465.454v93.09H279.273v-93.09zm0 186.182h465.454v93.09H279.273v-93.09z"></path></svg>
+                        <h6 style="float: right;">{{.shownumber}}</h6>
+                    </div>
+                </div>
+                <hr class="layui-bg-gray">
+                <blockquote class="layui-elem-quote" style="margin-top: 5px">{{.abstract}}</blockquote>
+                <p>
+                    {{str2html .content}}
+                </p>
+            </div>
+        </div>
+        <div class="layui-col-md3 ">
+            <div class="fly-panel detail-box">
+                <p>上一篇：</p>
+                <a href="#"></a>
+            </div>
+            <div class="fly-panel detail-box">
+                <p>下一篇：</p>
+                <a href="#"></a>
+            </div>
+        </div>
+    </div>
+</div>
+<ul class="flow-default" id="LAY_demo1"></ul>
+{{template "foot.html"}}
+<script src="/static/js/jquery.js"></script>
+</body>
+</html>

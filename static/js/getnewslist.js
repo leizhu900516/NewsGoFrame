@@ -14,12 +14,12 @@ $(document).ready(function () {
                     '                            </div>\n' +
                     '                            <div class="layui-col-md9"  id="news_item_all_style">\n' +
                     '                                <div class="new_home_list">\n' +
-                    '                                    <a class="news_title">'+j.title+'</a>\n' +
+                    '                                    <a href="/news/'+j.newid+'" class="news_title">'+j.title+'</a>\n' +
                     '                                    <br>\n' +
-                    '                                    <a class="news_abstract">'+j.abstract+'</a>\n' +
+                    '                                    <a href="/news/'+j.newid+'" class="news_abstract">'+j.abstract+'</a>\n' +
                     '                                    <div class="bottom_refer_and_icon">\n' +
                     '                                        <div class="left">\n' +
-                    '                                            <span>赞</span>\n' +
+                    '                                            <i class="layui-icon">&#xe6c6;</i><span>赞</span>\n' +
                     '                                        </div>\n' +
                     '                                        <div class="right">\n' +
                     '                                            <i class="layui-icon"> &#xe60e;</i><span>30分钟前</span>\n' +

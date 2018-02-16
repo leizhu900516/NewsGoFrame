@@ -208,3 +208,7 @@ html {
     width: 100%;
 }
 
+/*文章详情页*/
+.detail-box{
+    padding: 20px;
+}
