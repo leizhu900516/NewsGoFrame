@@ -10,6 +10,7 @@ import (
 	"reflect"
 	"encoding/json"
 	"log"
+	"strconv"
 )
 /*
 *beego默认主页
@@ -22,6 +23,7 @@ type MainController struct {
 func (c *MainController) Get() {
 	c.Data["Website"] = "beego.me"
 	c.Data["Email"] = "astaxie@gmail.com"
+	c.Data["Request_url"] = "/"
 	c.TplName = "index.html"
 }
 
@@ -32,14 +34,13 @@ type TestController struct {
 func (self *TestController) Post() {
 	/*新闻列表api*/
 	returndata := make(map[string]interface{})
-	var ob map[string]interface{}
+	var ob map[string]int
 	json.Unmarshal(self.Ctx.Input.RequestBody, &ob)
 	fmt.Println(ob["page"])
 	//fmt.Println(string(ob))
 	//param := self.Input()
 	page :=ob["page"]
-	limit :=6
-	fmt.Println(">>>>>>",page,limit)
+	limit :=ob["limit"]
 	db, err := sql.Open("mysql", beego.AppConfig.String("mysqluser")+":"+beego.AppConfig.String("mysqlpass")+"@tcp("+beego.AppConfig.String("mysqlurls")+":"+beego.AppConfig.String("mysqlport")+")/"+beego.AppConfig.String("mysqldb")+"?charset=utf8")
 	fmt.Println(reflect.TypeOf(db))
 	if err != nil {
@@ -50,7 +51,7 @@ func (self *TestController) Post() {
 		self.ServeJSON()
 	}
 	//在这里进行一些数据库操作
-	sql := fmt.Sprintf("select * from news_wechat limit %s,%d",page,limit)
+	sql := fmt.Sprintf("select * from news_wechat limit %d,%d",(page-1)*8,limit)
 	result := selectSqlData(db,sql)
 	returndata["code"] = 0
 	returndata["msg"] = "success"
@@ -58,12 +59,16 @@ func (self *TestController) Post() {
 	self.Data["json"]=returndata
 	self.ServeJSON()
 }
+/*
+*新闻详情
+*/
 type NewsDetailController struct {
 	beego.Controller
 }
 func (self *NewsDetailController) Get(){
 	fmt.Println(self.Ctx.Input.Param(":newsid"))
-	newsid := self.Ctx.Input.Param(":newsid")
+	newsid,err := strconv.Atoi(self.Ctx.Input.Param(":newsid"))
+	fmt.Println(reflect.TypeOf(newsid))
 	db, err := sql.Open("mysql", beego.AppConfig.String("mysqluser")+":"+beego.AppConfig.String("mysqlpass")+"@tcp("+beego.AppConfig.String("mysqlurls")+":"+beego.AppConfig.String("mysqlport")+")/"+beego.AppConfig.String("mysqldb")+"?charset=utf8")
 	if err!=nil{
 		log.Fatal(err)
@@ -76,20 +81,30 @@ func (self *NewsDetailController) Get(){
 		content string
 		addtime int64
 		shownumber int
+		previous string
+		next string
 	)
 	err =db.QueryRow("select cateid,title,abstract,content,addtime,shownumber from news_wechat where newid=?",newsid).Scan(&cateid,&title,&abstract,&content,&addtime,&shownumber)
 	if err!=nil{
 		fmt.Println(err)
 	}
+	err = db.QueryRow("select title from news_wechat where newid=?",int(newsid)+1).Scan(&next)
+	err = db.QueryRow("select title from news_wechat where newid=?",int(newsid)-1).Scan(&previous)
 	db.Exec("update news_wechat set shownumber=shownumber+1 where newid=?",newsid)
+	self.Data["newsid"] = newsid
 	self.Data["cateid"] = cateid
 	self.Data["title"] = title
+	self.Data["previous"] = previous
+	self.Data["next"] = next
 	self.Data["abstract"] = abstract
 	self.Data["content"] = content
 	self.Data["shownumber"] = shownumber
 	self.Data["addtime"] = time.Unix(addtime,0).Format("2006-01-02 03:04:05 PM")
 	self.TplName = "news-detail.html"
 }
+/*
+*测试
+*/
 type TestJsonController struct{
 	beego.Controller
 }

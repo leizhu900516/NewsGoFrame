@@ -10,4 +10,6 @@ func init() {
     beego.Router("/api/news", &controllers.TestController{}) //新闻列表api
     beego.Router("/news/:newsid:int", &controllers.NewsDetailController{}) //新闻详情
     beego.Router("/request", &controllers.TestJsonController{})
+    beego.Router("/search", &controllers.TestJsonController{})
+    beego.Router("/news/type1", &controllers.TestJsonController{})//新闻分类页
 }

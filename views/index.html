@@ -1,5 +1,5 @@
 
-{{template "base.html"}}
+{{template "base.html" .}}
 <br>
 <div class="layui-container">
     <div class="layui-row layui-col-space10" >
@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </div>
-
+            <ul class="flow-default" id="LAY_demo1"></ul>
 
         </div>
         <div class="layui-col-md3 ">
@@ -102,10 +102,17 @@
         </div>
     </div>
 </div>
-<ul class="flow-default" id="LAY_demo1"></ul>
+        <div class="left_fixed">
+            <ul>
+                <li><i class="layui-icon" style="font-size: 24px;">&#xe68e;</i> </li>
+                <li><i class="layui-icon" style="font-size: 24px;">&#xe6c6;</i> </li>
+                <li><i class="layui-icon" style="font-size: 24px;">&#xe619;</i> </li>
+            </ul>
+        </div>
+
 {{template "foot.html"}}
 <script src="/static/js/jquery.js"></script>
-<script src="/static/js/getnewslist.js"></script>
+{{/*<script src="/static/js/getnewslist.js"></script>*/}}
 <script>
     layui.use('element', function(){
         var $ = layui.jquery
@@ -157,36 +164,66 @@
             ,scrollElem: '#LAY_demo1' //滚动条所在元素，一般不用填，此处只是演示需要。
             ,done: function(page, next){ //执行下一页的回调
                 //模拟数据插入
+                console.log(page,next)
                 setTimeout(function(){
                     var lis = [];
-                    for(var i = 0; i < 8; i++){
-                        lis.push('<li>'+ ( (page-1)*8 + i + 1 ) +'</li>')
-                    }
+                    // for(var i = 0; i < 8; i++){
+                    //     lis.push('<li>'+ ( (page-1)*8 + i + 1 ) +'</li>')
+                    // }
+                    $.ajax({
+                        url:"/api/news",
+                        data:JSON.stringify({"page":page,"limit":6}),
+                        contentType: "application/json;charset=utf-8",
+                        type:"post",
+                        success:function (result) {
+                            $.each(result.data,function (i, j) {
+                                console.log(j)
+                                $("#newslist_left").append('<div class="layui-row grid-demo layui-col-space10 site-demo-flow">\n' +
+                                        '                            <div class="layui-col-md3">\n' +
+                                        '                                <img src="https://gw.alicdn.com/bao/uploaded/i2/162734861/TB2V5rsX_gc61BjSZFkXXcTkFXa_!!162734861.jpg_400x400q90.jpg?t=1518395023940">\n' +
+                                        '                            </div>\n' +
+                                        '                            <div class="layui-col-md9"  id="news_item_all_style">\n' +
+                                        '                                <div class="new_home_list">\n' +
+                                        '                                    <a href="/news/'+j.newid+'" class="news_title">'+j.title+'</a>\n' +
+                                        '                                    <br>\n' +
+                                        '                                    <a href="/news/'+j.newid+'" class="news_abstract">'+j.abstract+'</a>\n' +
+                                        '                                    <div class="bottom_refer_and_icon">\n' +
+                                        '                                        <div class="left">\n' +
+                                        '                                            <i class="layui-icon">&#xe6c6;</i><span>赞</span>\n' +
+                                        '                                        </div>\n' +
+                                        '                                        <div class="right">\n' +
+                                        '                                            <i class="layui-icon"> &#xe60e;</i><span>30分钟前</span>\n' +
+                                        '                                        </div>\n' +
+                                        '                                    </div>\n' +
+                                        '                                </div>\n' +
+                                        '                            </div>\n' +
+                                        '                        </div>')
+                            })
+                        }
 
+                    })
                     //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
                     //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
                     next(lis.join(''), page < 10); //假设总页数为 10
                 }, 500);
             }
         });
-
-        flow.load({
-            elem: '#LAY_demo2' //流加载容器
-            ,scrollElem: '#LAY_demo2' //滚动条所在元素，一般不用填，此处只是演示需要。
-            ,isAuto: false
-            ,isLazyimg: true
-            ,done: function(page, next){ //加载下一页
-                //模拟插入
-                setTimeout(function(){
-                    var lis = [];
-                    for(var i = 0; i < 6; i++){
-                        lis.push('<li><img lay-src="http://s17.mogucdn.com/p2/161011/upload_279h87jbc9l0hkl54djjjh42dc7i1_800x480.jpg?v='+ ( (page-1)*6 + i + 1 ) +'"></li>')
-                    }
-                    next(lis.join(''), page < 6); //假设总页数为 6
-                }, 500);
-            }
-        });
-
+    });
+</script>
+<script>
+    //搜索
+    $(document).ready(function () {
+        $("#searchicon").on('click',function () {
+            var keyword=$("#key").val();
+            window.location.href="/search?q="+keyword;
+        })
+    });
+    $(document).keypress(function(e) {
+        // 回车键事件
+        if(e.which == 13) {
+            var keyword=$("#key").val();
+            window.location.href="/search?q="+keyword;
+        }
     });
 </script>
 </body>

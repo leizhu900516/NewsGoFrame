@@ -11,24 +11,24 @@
 <div class="layui-nav layui-bg-black">
     <div class="layui-container">
         <ul class="layui-nav">
-            <li class="layui-nav-item">
-                <a href="">最新活动</a>
+            <li class="layui-nav-item {{if .Request_url}}{{if eq "/" .Request_url}}layui-this{{end}}{{end}}" >
+                <a href="">资讯</a>
             </li>
-            <li class="layui-nav-item layui-this">
-                <a href="javascript:;">产品</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">选项1</a></dd>
-                    <dd><a href="">选项2</a></dd>
-                    <dd><a href="">选项3</a></dd>
-                </dl>
+            {{/*<li class="layui-nav-item layui-this">*/}}
+                {{/*<a href="javascript:;">产品</a>*/}}
+                {{/*<dl class="layui-nav-child">*/}}
+                    {{/*<dd><a href="">选项1</a></dd>*/}}
+                    {{/*<dd><a href="">选项2</a></dd>*/}}
+                    {{/*<dd><a href="">选项3</a></dd>*/}}
+                {{/*</dl>*/}}
+            {{/*</li>*/}}
+            <li class="layui-nav-item"><a href="">快讯</a></li>
+            <li class="layui-nav-item"><a href="/">行情</a></li>
+            <li class="layui-nav-item position">
+                <input  type="text" placeholder="输入关键词 按enter搜索" value="" class="layui-input" style="margin-top: 10px;width: 182px;"><i id="searchicon" class="layui-icon search">&#xe615;</i>
             </li>
-            <li class="layui-nav-item"><a href="">大数据</a></li>
-            <li class="layui-nav-item"><a href="/">主页</a></li>
             <li class="layui-nav-item">
-                <input type="text" placeholder="搜索你想看的主题" value="" class="layui-input">
-            </li>
-            <li class="layui-nav-item">
-                <i class="layui-icon">&#xe615;</i>
+
             </li>
         </ul>
         <ul class="layui-nav fly-nav-user">

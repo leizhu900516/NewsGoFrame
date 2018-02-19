@@ -212,3 +212,36 @@ html {
 .detail-box{
     padding: 20px;
 }
+/*搜索框样式*/
+.position{
+    position:absolute;
+}
+.search{
+    float: right;
+    margin-top: -49px;
+    color: red;
+    margin-right: 5px;
+}
+.search:hover{
+    cursor:pointer;
+}
+.left_fixed{
+    position: fixed;
+    z-index: 9999;
+    left: 20px;
+    top: 150px;
+    width: 39px;
+    overflow: visible;
+    clear: both;
+}
+.left_fixed li{
+    background-color: #fff;
+    width: 35px;
+    height: 39px;
+    margin-bottom: 17px;
+    padding-left: 13px;
+    padding-top: 18px;
+}
+.previous_next a:hover{
+    color: #1E9FFF;
+}
