@@ -8,7 +8,7 @@
     <script src="/static/layui/layui.js"></script>
 </head>
 <body>
-<div class="layui-nav layui-bg-black">
+<div class="fly-header layui-bg-black">
     <div class="layui-container">
         <ul class="layui-nav">
             <li class="layui-nav-item {{if .Request_url}}{{if eq "/" .Request_url}}layui-this{{end}}{{end}}" >
@@ -33,10 +33,10 @@
         </ul>
         <ul class="layui-nav fly-nav-user">
             <li class="layui-nav-item">
-                <a href="/user/login/">登入</a>
+                <a id="login">登入</a>
             </li>
             <li class="layui-nav-item">
-                <a href="/user/reg/">注册</a>
+                <a id="register">注册</a>
             </li>
             <span class="layui-nav-bar"></span>
         </ul>
