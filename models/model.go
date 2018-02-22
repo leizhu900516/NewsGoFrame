@@ -3,7 +3,7 @@ package models
 import (
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego"
-	"fmt"
+	_"fmt"
 )
 /*
 CREATE TABLE `news_wechat` (

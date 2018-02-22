@@ -239,8 +239,8 @@ html {
 .left_fixed{
     position: fixed;
     z-index: 9999;
-    left: 20px;
-    top: 150px;
+    left: 17%;
+    top: 48%;
     width: 39px;
     overflow: visible;
     clear: both;
@@ -255,4 +255,7 @@ html {
 }
 .previous_next a:hover{
     color: #1E9FFF;
+}
+.layui-layer-title{
+    text-align: center!important;
 }
