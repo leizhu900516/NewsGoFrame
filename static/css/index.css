@@ -32,6 +32,11 @@ html {
     color: #fff;
     font-size: 12px;
 }
+.label_background{
+    background-image: url("/static/images/newbackground.jpg");
+    background-repeat:no-repeat;repeat-x;repeat-y;
+    background-size: 100% 200px;
+}
 /*
 最新新闻
 */
