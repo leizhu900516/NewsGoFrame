@@ -1,14 +1,95 @@
 
 {{template "base.html" .}}
 <br>
-<div class="content label_background" style="margin-top: 60px;">
+<div class="content label_background" style="margin-top: 45px;">
     <div class="layui-container">
         <div class="layui-row" style="height: 200px;">
-            <div class="layui-col-md12">
-                <h1>标签啊什么的</h1>
+            <div class="layui-col-md12" >
+                <div class="layui-row layui-col-space3">
+                    <div class="layui-col-md12">
+                        <h2 class="h1_class_css_title">热门主题，尽在眼下。</h2>
+                    </div>
+                    <div class="layui-col-md2">
+                        <div class="grid-demo ">
+                            <h3>资讯类</h3>
+                            <h2>+2</h2>
+                        </div>
+                    </div>
+                    <div class="layui-col-md2">
+                        <div class="grid-demo">
+                            <h3>快讯类</h3>
+                            <h2>+2</h2>
+                        </div>
+                    </div>
+                    <div class="layui-col-md2">
+                        <div class="grid-demo ">
+                            <h3>专题类</h3>
+                            <h2>+2</h2>
+                        </div>
+                    </div>
+                    <div class="layui-col-md2">
+                        <div class="grid-demo-1">
+                            <h3>数据类</h3>
+                            <h2>+2</h2>
+                        </div>
+                    </div>
+                    <div class="layui-col-md2">
+                        <div class="grid-demo-1">
+                            <h3>行情类</h3>
+                            <h2>+2</h2>
+                        </div>
+                    </div>
+                    <div class="layui-col-md2">
+                        <div class="grid-demo-1">
+                            <h3>活动</h3>
+                            <h2>+2</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md12" style="margin-top: 2px">
+                <div class="layui-row layui-col-space3">
+                    <div class="layui-col-md1">
+                        <div class="grid-demo-child">微信</div>
+                    </div>
+                    <div class="layui-col-md1">
+                        <div class="grid-demo-child">保险</div>
+                    </div>
+                    <div class="layui-col-md1">
+                        <div class="grid-demo-child">在线教育</div>
+                    </div>
+                    <div class="layui-col-md1">
+                        <div class="grid-demo-child">生活</div>
+                    </div>
+                    <div class="layui-col-md1">
+                        <div class="grid-demo-child">娱乐</div>
+                    </div>
+                    <div class="layui-col-md1">
+                        <div class="grid-demo-child">广告</div>
+                    </div>
+                    <div class="layui-col-md1">
+                        <div class="grid-demo-child-1">原创</div>
+                    </div>
+                    <div class="layui-col-md1">
+                        <div class="grid-demo-child-1">热点</div>
+                    </div>
+                    <div class="layui-col-md1">
+                        <div class="grid-demo-child-1">新闻</div>
+                    </div>
+                    <div class="layui-col-md1">
+                        <div class="grid-demo-child-1">政治</div>
+                    </div>
+                    <div class="layui-col-md1">
+                        <div class="grid-demo-child-1">购物</div>
+                    </div>
+                    <div class="layui-col-md1">
+                        <div class="grid-demo-child-1">服务</div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="layui-row layui-col-space10" >
+
+        <div class="layui-row layui-col-space10" style="margin-top: 45px;">
             <div class="layui-col-md9 ">
                 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
                     <ul class="layui-tab-title">
@@ -18,7 +99,7 @@
                     <div class="layui-tab-content" >
                         <!--新闻列表-->
                         <div class="layui-tab-item layui-show" id="newslist_left">
-                            <div class="layui-row grid-demo layui-col-space10 site-demo-flow">
+                            <div class="layui-row  layui-col-space10 site-demo-flow">
                                 <div class="layui-col-md3">
                                     <img src="https://gw.alicdn.com/bao/uploaded/i2/162734861/TB2V5rsX_gc61BjSZFkXXcTkFXa_!!162734861.jpg_400x400q90.jpg?t=1518395023940">
                                 </div>
@@ -187,7 +268,7 @@
                         success:function (result) {
                             $.each(result.data,function (i, j) {
                                 console.log(j)
-                                $("#newslist_left").append('<div class="layui-row grid-demo layui-col-space10 site-demo-flow">\n' +
+                                $("#newslist_left").append('<div class="layui-row  layui-col-space10 site-demo-flow">\n' +
                                         '                            <div class="layui-col-md3">\n' +
                                         '                                <img src="https://gw.alicdn.com/bao/uploaded/i2/162734861/TB2V5rsX_gc61BjSZFkXXcTkFXa_!!162734861.jpg_400x400q90.jpg?t=1518395023940">\n' +
                                         '                            </div>\n' +

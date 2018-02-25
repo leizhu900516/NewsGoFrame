@@ -101,8 +101,14 @@ func (r *Rect) Runcmd(params CommandParam,ret *string) error {
 	cmd.Start()
 	return nil
 }
+func ProcessIsAlive() bool{
+	/*
+	判断进程是否存活
+	*/
+	return true
+}
 
-func healthcheck(){
+func Healthcheck(){
 	/*
 	*进程状态健康检测函数
 	*/
@@ -120,7 +126,7 @@ func main() {
 	//把服务处理绑定到http协议上
 	rpc.HandleHTTP();
 	log.Println("start rpc server on 8080!")
-	go healthcheck()
+	go Healthcheck()
 	err := http.ListenAndServe(":8080", nil);
 	if err != nil {
 		log.Fatal(err);
