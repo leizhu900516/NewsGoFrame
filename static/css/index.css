@@ -85,6 +85,7 @@ html {
     text-align: center;
     color: #333;
     padding-top: 20px;
+    font-weight: bold;
 }
 .grid-demo,.grid-demo-1,.grid-demo-child-1,.grid-demo-child{
     -webkit-transition: transform 0.5s ease-in,opacity 0.5s ease-in!important;
@@ -319,7 +320,10 @@ html {
     padding-top: 18px;
 }
 .previous_next a:hover{
-    color: #1E9FFF;
+    color: #5FB878;
+}
+.previous_next a{
+    color:#01AAED;
 }
 .layui-layer-title{
     text-align: center!important;
