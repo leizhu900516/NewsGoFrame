@@ -103,6 +103,32 @@ func (self *NewsDetailController) Get(){
 	self.TplName = "news-detail.html"
 }
 /*
+*新闻分类接口
+*/
+type NewsTypeController struct{
+	beego.Controller
+}
+func (self *NewsTypeController) Post(){
+	data := make(map[string]interface{})
+	param := make(map[string]int)
+	json.Unmarshal(self.Ctx.Input.RequestBody,&param)
+	newstype := param["newstype"]
+	limit := param["limit"]
+	page := param["page"]
+	fmt.Println(newstype)
+	selectsql := fmt.Sprintf("select * from news_wechat where cateid = %d limit %d,%d",newstype,(page-1)*limit,limit)
+	fmt.Println(selectsql)
+	db,err :=sql.Open("mysql",beego.AppConfig.String("mysqlurl"))
+	checkErr(err)
+	result :=selectSqlData(db,selectsql)
+	data["code"]=0
+	data["msg"]=""
+	data["data"]=result
+	self.Data["json"]=data
+	self.ServeJSON()
+
+}
+/*
 *测试
 */
 type TestJsonController struct{
@@ -162,3 +188,4 @@ func selectSqlData(db *sql.DB,sql string) map[int]map[string]string{
 	}
 	return result
 }
+

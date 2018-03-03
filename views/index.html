@@ -98,33 +98,41 @@
                     </ul>
                     <div class="layui-tab-content" >
                         <!--新闻列表-->
-                        <div class="layui-tab-item layui-show" id="newslist_left">
-                            <div class="layui-row  layui-col-space10 site-demo-flow">
-                                <div class="layui-col-md3">
-                                    <img src="https://gw.alicdn.com/bao/uploaded/i2/162734861/TB2V5rsX_gc61BjSZFkXXcTkFXa_!!162734861.jpg_400x400q90.jpg?t=1518395023940">
-                                </div>
-                                <div class="layui-col-md9" id="news_item_all_style">
-                                    <div class="new_home_list">
-                                        <a class="news_title">中国证监会：3月26日启动原油期货挂牌交易</a>
-                                        <br>
-                                        <a class="news_abstract">1992年，我国就推出原油、成品油的期货交易，但上市不久就关闭了交易。未来“上海油”，有望与现有的纽约、伦敦两地基准油价，共同组成全球24小时的连续交易机制.</a>
-                                        <div class="bottom_refer_and_icon">
-                                            <div class="left">
-                                                <i class="layui-icon">&#xe6c6;</i> <span>赞</span>
-                                            </div>
-                                            <div class="right">
-                                                <i class="layui-icon"> &#xe60e;</i><span>30分钟前</span>
+
+                        <div class="layui-tab-item layui-show" >
+                            <div id="newslist_left">
+                                <div class="layui-row  layui-col-space10 site-demo-flow">
+                                    <div class="layui-col-md3">
+                                        <img src="https://gw.alicdn.com/bao/uploaded/i2/162734861/TB2V5rsX_gc61BjSZFkXXcTkFXa_!!162734861.jpg_400x400q90.jpg?t=1518395023940">
+                                    </div>
+                                    <div class="layui-col-md9" id="news_item_all_style">
+                                        <div class="new_home_list">
+                                            <a class="news_title">中国证监会：3月26日启动原油期货挂牌交易</a>
+                                            <br>
+                                            <a class="news_abstract">1992年，我国就推出原油、成品油的期货交易，但上市不久就关闭了交易。未来“上海油”，有望与现有的纽约、伦敦两地基准油价，共同组成全球24小时的连续交易机制.</a>
+                                            <div class="bottom_refer_and_icon">
+                                                <div class="left">
+                                                    <i class="layui-icon">&#xe6c6;</i> <span>赞</span>
+                                                </div>
+                                                <div class="right">
+                                                    <i class="layui-icon"> &#xe60e;</i><span>30分钟前</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
+                            <ul class="flow-default" id="LAY_demo1"></ul>
                             <!--新闻列表-->
                         </div>
 
+
+
+
                         <div class="layui-tab-item">
                             <div class="fly-panel">
-                                <ul class="hot-list" data-v-5ee82df8="">
+                                <ul class="hot-list" data-v-5ee82df8="" id="news_list_little">
                                     <li class="hot-article" data-v-5ee82df8="">
                                         <div class="hot-article__title" data-v-5ee82df8="">
                                             <div class="hot-article__title__idx first" data-v-5ee82df8="">1</div>
@@ -144,11 +152,12 @@
                                         </div> <!---->
                                     </li>
                                 </ul>
+                                <ul class="flow-default" id="LAY_demo2"></ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <ul class="flow-default" id="LAY_demo1"></ul>
+
 
             </div>
             <div class="layui-col-md3 ">
@@ -213,26 +222,6 @@
             //console.log(elem)
             layer.msg(elem.text());
         });
-        //触发事件
-        var active = {
-            tabAdd: function(){
-                //新增一个Tab项
-                element.tabAdd('demo', {
-                    title: '新选项'+ (Math.random()*1000|0) //用于演示
-                    ,content: '内容'+ (Math.random()*1000|0)
-                    ,id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
-                })
-            }
-            ,tabChange: function(){
-                //切换到指定Tab项
-                element.tabChange('demo', '22'); //切换到：用户管理
-            }
-        };
-
-        $('.site-demo-active').on('click', function(){
-            var othis = $(this), type = othis.data('type');
-            active[type] ? active[type].call(this, othis) : '';
-        });
 
         //Hash地址的定位
         var layid = location.hash.replace(/^#test=/, '');
@@ -291,10 +280,40 @@
                             })
                         }
 
-                    })
+                    });
                     //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
                     //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
                     next(lis.join(''), page < 10); //假设总页数为 10
+                }, 500);
+            }
+        });
+        flow.load({
+            elem: '#LAY_demo2' //流加载容器
+            ,scrollElem: '#LAY_demo2'
+            ,done: function(page, next){ //执行下一页的回调
+                //模拟数据插入
+                console.log(page,next);
+                setTimeout(function(){
+                    var lis = [];
+                    $.ajax({
+                        url:"/api/news",
+                        data:JSON.stringify({"page":page,"limit":6,"newstype":1}),
+                        contentType: "application/json;charset=utf-8",
+                        type:"post",
+                        success:function (result) {
+                            $.each(result.data,function (i, j) {
+                                console.log(j)
+                                $("#news_list_little").append('<li class="hot-article" data-v-5ee82df8="">\n' +
+                                        '                          <div class="hot-article__title" data-v-5ee82df8="">\n' +
+                                        '                               <div class="hot-article__title__idx" data-v-5ee82df8="">'+i+'</div>\n' +
+                                        '                                  <a target="_blank" href="/news/'+j.newid+'" class="hot-article__title__text" data-v-5ee82df8="">'+j.title+'</a>\n' +
+                                        '                          </div> <!---->\n' +
+                                        '                      </li>')
+                            })
+                        }
+
+                    });
+                    next(lis.join(''), page < 10); //总页数为 10
                 }, 500);
             }
         });
