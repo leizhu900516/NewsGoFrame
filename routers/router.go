@@ -11,5 +11,5 @@ func init() {
     beego.Router("/news/:newsid:int", &controllers.NewsDetailController{}) //新闻详情
     beego.Router("/request", &controllers.TestJsonController{})
     beego.Router("/search", &controllers.TestJsonController{})
-    beego.Router("/api/news", &controllers.NewsTypeController{})//新闻分类页
+    beego.Router("/news/type/:newstype:int", &controllers.NewsTypeListController{})//新闻分类列表页
 }

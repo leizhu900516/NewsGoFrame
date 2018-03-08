@@ -78,6 +78,9 @@ html {
 .grid-demo h2{
     margin-top: -50px;
 }
+.grid-demo-child a,.grid-demo-child-1 a,.grid-demo-1 h3 a,.grid-demo h3 a{
+    color:#fff;
+}
 .grid-demo-1 h2{
     margin-top: -50px;
 }
@@ -327,4 +330,10 @@ html {
 }
 .layui-layer-title{
     text-align: center!important;
+}
+/*登陆*/
+#login_modle{
+    margin-top: 12px;
+    margin-right: 28px;
+    display: none;
 }

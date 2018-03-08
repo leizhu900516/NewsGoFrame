@@ -108,7 +108,7 @@ func (self *NewsDetailController) Get(){
 type NewsTypeController struct{
 	beego.Controller
 }
-func (self *NewsTypeController) Post(){
+func (self *NewsTypeController) Get(){
 	data := make(map[string]interface{})
 	param := make(map[string]int)
 	json.Unmarshal(self.Ctx.Input.RequestBody,&param)
@@ -126,6 +126,28 @@ func (self *NewsTypeController) Post(){
 	data["data"]=result
 	self.Data["json"]=data
 	self.ServeJSON()
+
+}
+/*
+*新闻分类列表
+*/
+type NewsTypeListController struct{
+	beego.Controller
+}
+func (self *NewsTypeListController) Get(){
+	data := make(map[string]interface{})
+	newstype := self.Ctx.Input.Param(":newsid")
+	fmt.Println(newstype)
+	selectsql := fmt.Sprintf("select * from news_wechat where cateid = %d limit %d,%d",newstype,0,10)
+	fmt.Println(selectsql)
+	db,err :=sql.Open("mysql",beego.AppConfig.String("mysqlurl"))
+	checkErr(err)
+	result :=selectSqlData(db,selectsql)
+	data["code"]=0
+	data["msg"]=""
+	data["data"]=result
+	self.Data["json"]=data
+	self.TplName="catenewslist.html"
 
 }
 /*

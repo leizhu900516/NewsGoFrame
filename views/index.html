@@ -11,37 +11,37 @@
                     </div>
                     <div class="layui-col-md2">
                         <div class="grid-demo ">
-                            <h3>资讯类</h3>
+                            <h3><a href="/news/type/1" class="while_font_color">微信</a></h3>
                             <h2>+2</h2>
                         </div>
                     </div>
                     <div class="layui-col-md2">
                         <div class="grid-demo">
-                            <h3>快讯类</h3>
+                            <h3><a href="/news/type/2">公众号 </a></h3>
                             <h2>+2</h2>
                         </div>
                     </div>
                     <div class="layui-col-md2">
                         <div class="grid-demo ">
-                            <h3>专题类</h3>
+                            <h3><a href="/news/type/3">社群</a></h3>
                             <h2>+2</h2>
                         </div>
                     </div>
                     <div class="layui-col-md2">
                         <div class="grid-demo-1">
-                            <h3>数据类</h3>
+                            <h3><a href="/news/type/4">社群运营</a></h3>
                             <h2>+2</h2>
                         </div>
                     </div>
                     <div class="layui-col-md2">
                         <div class="grid-demo-1">
-                            <h3>行情类</h3>
+                            <h3><a href="/news/type/5">社群营销</a></h3>
                             <h2>+2</h2>
                         </div>
                     </div>
                     <div class="layui-col-md2">
                         <div class="grid-demo-1">
-                            <h3>活动</h3>
+                            <h3><a href="/news/type/6">微信营销</a></h3>
                             <h2>+2</h2>
                         </div>
                     </div>
@@ -50,10 +50,10 @@
             <div class="layui-col-md12" style="margin-top: 2px">
                 <div class="layui-row layui-col-space3">
                     <div class="layui-col-md1">
-                        <div class="grid-demo-child">微信</div>
+                        <div class="grid-demo-child"><a href="/news/type/8">网络营销</a></div>
                     </div>
                     <div class="layui-col-md1">
-                        <div class="grid-demo-child">保险</div>
+                        <div class="grid-demo-child"><a href="/news/type/7">社会化营销</a></div>
                     </div>
                     <div class="layui-col-md1">
                         <div class="grid-demo-child">在线教育</div>
@@ -207,7 +207,30 @@
         </ul>
     </div>
 </div>
-
+<!--登陆模态框start-->
+<div id="login_modle">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--登陆模态框end-->
 
 {{template "foot.html"}}
 <script src="/static/js/jquery.js"></script>
@@ -345,9 +368,7 @@
                         offset: 'auto',
                         skin: 'layui-layer-rim', //加上边框
                         area: ['420px', '240px'], //宽高
-                        content: '<div><input type="text" name="title" required  lay-verify="required" placeholder="手机号/用户名/邮箱"  class="layui-input"></div>' +
-                        '<div><input type="text" name="title" required  lay-verify="required" placeholder="密码（不少于6位）"  class="layui-input"></div>' +
-                        '<br><div style="text-align: center"><button class="layui-btn layui-btn-normal" style="width: 200px;">登录</button></div>'
+                        content:$("#login_modle")
                     });
                 })
             });
