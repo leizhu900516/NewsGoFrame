@@ -51,7 +51,7 @@ func (self *TestController) Post() {
 		self.ServeJSON()
 	}
 	//在这里进行一些数据库操作
-	sql := fmt.Sprintf("select * from news_wechat limit %d,%d",(page-1)*8,limit)
+	sql := fmt.Sprintf("select * from newslist limit %d,%d",(page-1)*8,limit)
 	result := selectSqlData(db,sql)
 	returndata["code"] = 0
 	returndata["msg"] = "success"
@@ -84,13 +84,13 @@ func (self *NewsDetailController) Get(){
 		previous string
 		next string
 	)
-	err =db.QueryRow("select cateid,title,abstract,content,addtime,shownumber from news_wechat where newid=?",newsid).Scan(&cateid,&title,&abstract,&content,&addtime,&shownumber)
+	err =db.QueryRow("select cateid,title,abstract,content,addtime,shownumber from newslist where newid=?",newsid).Scan(&cateid,&title,&abstract,&content,&addtime,&shownumber)
 	if err!=nil{
 		fmt.Println(err)
 	}
-	err = db.QueryRow("select title from news_wechat where newid=?",int(newsid)+1).Scan(&next)
-	err = db.QueryRow("select title from news_wechat where newid=?",int(newsid)-1).Scan(&previous)
-	db.Exec("update news_wechat set shownumber=shownumber+1 where newid=?",newsid)
+	err = db.QueryRow("select title from newslist where newid=?",int(newsid)+1).Scan(&next)
+	err = db.QueryRow("select title from newslist where newid=?",int(newsid)-1).Scan(&previous)
+	db.Exec("update newslist set shownumber=shownumber+1 where newid=?",newsid)
 	self.Data["newsid"] = newsid
 	self.Data["cateid"] = cateid
 	self.Data["title"] = title
@@ -116,7 +116,7 @@ func (self *NewsTypeController) Get(){
 	limit := param["limit"]
 	page := param["page"]
 	fmt.Println(newstype)
-	selectsql := fmt.Sprintf("select * from news_wechat where cateid = %d limit %d,%d",newstype,(page-1)*limit,limit)
+	selectsql := fmt.Sprintf("select * from newslist where cateid = %d limit %d,%d",newstype,(page-1)*limit,limit)
 	fmt.Println(selectsql)
 	db,err :=sql.Open("mysql",beego.AppConfig.String("mysqlurl"))
 	checkErr(err)
@@ -138,7 +138,7 @@ func (self *NewsTypeListController) Get(){
 	data := make(map[string]interface{})
 	newstype := self.Ctx.Input.Param(":newsid")
 	fmt.Println(newstype)
-	selectsql := fmt.Sprintf("select * from news_wechat where cateid = %d limit %d,%d",newstype,0,10)
+	selectsql := fmt.Sprintf("select * from newslist where cateid = %d limit %d,%d",newstype,0,10)
 	fmt.Println(selectsql)
 	db,err :=sql.Open("mysql",beego.AppConfig.String("mysqlurl"))
 	checkErr(err)
