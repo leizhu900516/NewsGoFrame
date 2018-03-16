@@ -13,10 +13,13 @@
                     </div>
                 </div>
                 <hr class="layui-bg-gray">
-                <blockquote class="layui-elem-quote" style="margin-top: 5px">{{.abstract}}</blockquote>
-                <p>
+                <blockquote class="layui-elem-quote article_abstract" style="margin-top: 5px">{{.abstract}}</blockquote>
+                <div class="article_comment">
+                    <p>
                     {{str2html .content}}
-                </p>
+                    </p>
+                </div>
+
             </div>
         </div>
         <div class="layui-col-md3 ">

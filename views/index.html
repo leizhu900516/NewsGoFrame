@@ -162,37 +162,22 @@
             </div>
             <div class="layui-col-md3 ">
                 <div class="fly-panel">
-                    <h3 class="fly-panel-title">温馨通道</h3>
-                    <ul class="fly-panel-main fly-list-static">
-                        <li>
-                            <a href="http://fly.layui.com/jie/4281/" target="_blank">layui 的 GitHub 及 Gitee (码云) 仓库，欢迎Star</a>
-                        </li>
-                        <li>
-                            <a href="http://fly.layui.com/jie/5366/" target="_blank"> layui 常见问题的处理和实用干货集锦 </a>
-                        </li>
-                        <li>
-                            <a href="http://fly.layui.com/jie/13435/" target="_blank"> 关于Fly社区飞吻的消耗与增加 </a>
-                        </li>
-                        <li>
-                            <a name="signin"></a> <a href="http://fly.layui.com/jie/19804/" target="_blank"> 《layui从鱼到渔》系列教程 </a>
-                        </li>
-                        <li>
-                            <a href="http://www.layui.com/template/fly/" target="_blank">下载“Fly社区”页面模板：Fly Template</a>
-                        </li>
+                    <h3 class="fly-panel-title"><i class="layui-icon">&#xe60a;</i>   热门文章</h3>
+                    <ul class="fly-panel-main fly-list-static" id="hot_news_recommand">
                     </ul>
                 </div>
                 <div class="fly-panel">
                     <div class="fly-panel-title"> 钻级赞助商 <span class="fly-mid"></span>
-                        <a href="/jie/15697/" class="fly-link fly-joinad    ">我要加入</a>
+                        <a href="#" class="fly-link fly-joinad    ">我要加入</a>
                     </div>
                     <div class="fly-panel-main" style="padding: 13px 15px;">
-                        <a href="/jie/15697/" target="_blank" rel="nofollow" class="fly-zanzhu" style="background-color: #393D49;">虚席以待</a>
+                        <a href="#" target="_blank" rel="nofollow" class="fly-zanzhu" style="background-color: #393D49;">虚席以待</a>
                     </div>
                 </div>
                 <div class="fly-panel" style="padding: 20px 0; text-align: center;">
                     <div class="fly-panel-main">
-                        <img src="/static/images/gongzhonghao.jpg" style="max-width: 100%;" alt="layui">
-                        <p style="position: relative; color: #666;"> layui 公众号</p>
+                        <img src="/static/images/author.jpg" style="max-width: 100%;" alt="layui">
+                        <p style="position: relative; color: #666;"> 新闻公众号</p>
                     </div>
                 </div>
             </div>
@@ -279,16 +264,15 @@
                         type:"post",
                         success:function (result) {
                             $.each(result.data,function (i, j) {
-                                console.log(j)
                                 $("#newslist_left").append('<div class="layui-row  layui-col-space10 site-demo-flow">\n' +
                                         '                            <div class="layui-col-md3">\n' +
                                         '                                <img src="https://gw.alicdn.com/bao/uploaded/i2/162734861/TB2V5rsX_gc61BjSZFkXXcTkFXa_!!162734861.jpg_400x400q90.jpg?t=1518395023940">\n' +
                                         '                            </div>\n' +
                                         '                            <div class="layui-col-md9"  id="news_item_all_style">\n' +
                                         '                                <div class="new_home_list">\n' +
-                                        '                                    <a href="/news/'+j.newid+'" class="news_title">'+j.title+'</a>\n' +
+                                        '                                    <a href="/news/'+j.newsid+'" class="news_title">'+j.title+'</a>\n' +
                                         '                                    <br>\n' +
-                                        '                                    <a href="/news/'+j.newid+'" class="news_abstract">'+j.abstract+'</a>\n' +
+                                        '                                    <a href="/news/'+j.newsid+'" class="news_abstract">'+j.abstract+'</a>\n' +
                                         '                                    <div class="bottom_refer_and_icon">\n' +
                                         '                                        <div class="left">\n' +
                                         '                                            <i class="layui-icon">&#xe6c6;</i><span>赞</span>\n' +
@@ -325,7 +309,6 @@
                         type:"post",
                         success:function (result) {
                             $.each(result.data,function (i, j) {
-                                console.log(j)
                                 $("#news_list_little").append('<li class="hot-article" data-v-5ee82df8="">\n' +
                                         '                          <div class="hot-article__title" data-v-5ee82df8="">\n' +
                                         '                               <div class="hot-article__title__idx" data-v-5ee82df8="">'+i+'</div>\n' +
@@ -341,6 +324,13 @@
             }
         });
     });
+    $(document).ready(function () {
+        $.getJSON("/api/news/hot?page=1&limit=5",function (result) {
+            $.each(result.data,function (index, n) {
+                $("#hot_news_recommand").append('<li><a href="/news/'+n.newsid+'.html" target="_blank">'+n.title+'</a></li>')
+            })
+        })
+    })
 </script>
 <script>
     //搜索

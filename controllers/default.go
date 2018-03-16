@@ -84,13 +84,13 @@ func (self *NewsDetailController) Get(){
 		previous string
 		next string
 	)
-	err =db.QueryRow("select cateid,title,abstract,content,addtime,shownumber from newslist where newid=?",newsid).Scan(&cateid,&title,&abstract,&content,&addtime,&shownumber)
+	err =db.QueryRow("select cateid,title,abstract,content,addtime,shownumber from newslist where newsid=?",newsid).Scan(&cateid,&title,&abstract,&content,&addtime,&shownumber)
 	if err!=nil{
 		fmt.Println(err)
 	}
-	err = db.QueryRow("select title from newslist where newid=?",int(newsid)+1).Scan(&next)
-	err = db.QueryRow("select title from newslist where newid=?",int(newsid)-1).Scan(&previous)
-	db.Exec("update newslist set shownumber=shownumber+1 where newid=?",newsid)
+	err = db.QueryRow("select title from newslist where newsid=?",int(newsid)+1).Scan(&next)
+	err = db.QueryRow("select title from newslist where newsid=?",int(newsid)-1).Scan(&previous)
+	db.Exec("update newslist set shownumber=shownumber+1 where newsid=?",newsid)
 	self.Data["newsid"] = newsid
 	self.Data["cateid"] = cateid
 	self.Data["title"] = title
@@ -165,6 +165,26 @@ func (this *TestJsonController) Get(){
 	time.Sleep(time.Second*2)
 	this.ServeJSON()
 }
+/*热门新闻api*/
+type HotNewsApiController struct {
+	beego.Controller
+}
+func (self *HotNewsApiController) Get(){
+	data := make(map[string]interface{})
+	limit:=5
+	page,err:=strconv.Atoi(self.GetString("page"))
+	checkErr(err)
+	selectsql:=fmt.Sprintf("SELECT newsid,title FROM newslist ORDER BY shownumber LIMIT %d,%d",page,limit)
+	fmt.Println(selectsql)
+	db,err :=sql.Open("mysql",beego.AppConfig.String("mysqlurl"))
+	checkErr(err)
+	result :=selectSqlData(db,selectsql)
+	data["code"]=0
+	data["data"]=result
+	self.Data["json"]=data
+	self.ServeJSON()
+}
+
 func checkErr(err error){
 	if err!=nil{
 		panic(err)

@@ -292,6 +292,19 @@ html {
 .detail-box{
     padding: 20px;
 }
+.article_abstract{
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 28px;
+    color: #333;
+}
+.article_comment p{
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: .5px;
+    margin-bottom: 30px;
+    text-align: justify;
+}
 /*搜索框样式*/
 .position{
     position:absolute;
