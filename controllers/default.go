@@ -137,8 +137,9 @@ type NewsTypeListController struct{
 func (self *NewsTypeListController) Get(){
 	data := make(map[string]interface{})
 	newstype := self.Ctx.Input.Param(":newsid")
+	cate,err:=strconv.Atoi(newstype)
 	fmt.Println(newstype)
-	selectsql := fmt.Sprintf("select * from newslist where cateid = %d limit %d,%d",newstype,0,10)
+	selectsql := fmt.Sprintf("select * from newslist where cateid = %d limit %d,%d",cate,0,10)
 	fmt.Println(selectsql)
 	db,err :=sql.Open("mysql",beego.AppConfig.String("mysqlurl"))
 	checkErr(err)
@@ -147,7 +148,7 @@ func (self *NewsTypeListController) Get(){
 	data["msg"]=""
 	data["data"]=result
 	self.Data["json"]=data
-	self.TplName="catenewslist.html"
+	self.TplName="newslist.html"
 
 }
 /*
