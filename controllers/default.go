@@ -135,19 +135,17 @@ type NewsTypeListController struct{
 	beego.Controller
 }
 func (self *NewsTypeListController) Get(){
-	data := make(map[string]interface{})
-	newstype := self.Ctx.Input.Param(":newsid")
+	newstype := self.Ctx.Input.Param(":newstype")
 	cate,err:=strconv.Atoi(newstype)
 	fmt.Println(newstype)
-	selectsql := fmt.Sprintf("select * from newslist where cateid = %d limit %d,%d",cate,0,10)
+	selectsql := fmt.Sprintf("SELECT A.newsid,A.cateid,A.title,A.abstract,A.show_url,A.content,A.state,A.pubtime,A.url,A.shownumber,B.catename FROM newslist A JOIN newstypes B ON A.cateid=B.cate1 WHERE A.cateid = %d limit %d,%d",cate,0,10)
 	fmt.Println(selectsql)
 	db,err :=sql.Open("mysql",beego.AppConfig.String("mysqlurl"))
 	checkErr(err)
 	result :=selectSqlData(db,selectsql)
-	data["code"]=0
-	data["msg"]=""
-	data["data"]=result
-	self.Data["json"]=data
+	catename:=result[0]["catename"]
+	self.Data["result"] = result
+	self.Data["catename"]=catename
 	self.TplName="newslist.html"
 
 }
@@ -182,6 +180,7 @@ func (self *HotNewsApiController) Get(){
 	result :=selectSqlData(db,selectsql)
 	data["code"]=0
 	data["data"]=result
+
 	self.Data["json"]=data
 	self.ServeJSON()
 }

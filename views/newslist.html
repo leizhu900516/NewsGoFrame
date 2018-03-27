@@ -7,18 +7,37 @@
             <div class="fly-panel detail-box">
                 <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
                     <ul class="layui-tab-title">
-                        <li class="layui-this">网站设置</li>
-                        <li>用户管理</li>
-                        <li>权限分配</li>
-                        <li>商品管理</li>
-                        <li>订单管理</li>
+                        <li class="layui-this">{{.catename}}</li>
                     </ul>
-                    <div class="layui-tab-content" style="height: 100px;">
-                        <div class="layui-tab-item layui-show">内容不一样是要有，因为你可以监听tab事件（阅读下文档就是了）</div>
-                        <div class="layui-tab-item">内容2</div>
-                        <div class="layui-tab-item">内容3</div>
-                        <div class="layui-tab-item">内容4</div>
-                        <div class="layui-tab-item">内容5</div>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            {{ range $key,$value :=.result}}
+
+                                <div class="layui-row  layui-col-space10 site-demo-flow">
+                                    <div class="layui-col-md3">
+                                        <img src="https://gw.alicdn.com/bao/uploaded/i2/162734861/TB2V5rsX_gc61BjSZFkXXcTkFXa_!!162734861.jpg_400x400q90.jpg?t=1518395023940">
+                                    </div>
+                                    <div class="layui-col-md9" id="news_item_all_style">
+                                        <div class="new_home_list">
+                                            <a class="news_title" href="/news/{{$value.newsid}}">{{$value.title}}</a>
+                                            <br>
+                                            <a class="news_abstract">{{$value.abstract}}</a>
+                                            <div class="bottom_refer_and_icon">
+                                                <div class="left">
+                                                    <i class="layui-icon">&#xe6c6;</i> <span>赞</span>
+                                                </div>
+                                                <div class="right">
+                                                    <i class="layui-icon"> &#xe60e;</i><span>30分钟前</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                             {{end}}
+
+                        </div>
+
                     </div>
                 </div>
             </div>
