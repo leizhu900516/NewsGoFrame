@@ -1,5 +1,5 @@
 # NewsGoFrame
-基于golang语言的beego框架开发的通用新闻站点框架。
+基于go语言的beego框架结合前端layui开发的通用新闻站点框架。
 
 
 #### 总体缩略图
